@@ -13,6 +13,8 @@ library(corrplot)
 library(psych)
 library(caret)
 library(dplyr)
+library(base64enc)
+library(tools)
 
 # EXACTEMENT VOS DONNÉES ORIGINALES
 data(iris)
@@ -165,6 +167,40 @@ ui <- dashboardPage(
         }
         .tensorflow-scan {
           animation: pulse 1s infinite, gradientShift 2s ease infinite;
+        }
+        @keyframes scanLine {
+          0% { transform: translateY(-100%); opacity: 0; }
+          50% { opacity: 1; }
+          100% { transform: translateY(400px); opacity: 0; }
+        }
+        @keyframes photoGlow {
+          0% { box-shadow: 0 0 20px rgba(78, 205, 196, 0.5); }
+          50% { box-shadow: 0 0 40px rgba(255, 107, 107, 0.8), 0 0 60px rgba(78, 205, 196, 0.6); }
+          100% { box-shadow: 0 0 20px rgba(78, 205, 196, 0.5); }
+        }
+        .photo-scanner {
+          position: relative;
+          border: 3px solid #4ECDC4;
+          border-radius: 15px;
+          overflow: hidden;
+          background: linear-gradient(45deg, #667eea, #764ba2);
+          animation: photoGlow 2s ease-in-out infinite;
+        }
+        .scan-overlay {
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          height: 4px;
+          background: linear-gradient(90deg, transparent, #00ff00, transparent);
+          animation: scanLine 2s ease-in-out infinite;
+          z-index: 10;
+        }
+        .photo-display {
+          max-width: 100%;
+          max-height: 300px;
+          border-radius: 10px;
+          filter: brightness(1.1) contrast(1.2);
         }
       "))
     ),
@@ -487,6 +523,19 @@ ui <- dashboardPage(
                            buttonLabel = "📸 CHOISIR PHOTO",
                            placeholder = "Aucune photo sélectionnée"),
                   
+                  # AFFICHAGE FUTURISTE DE LA PHOTO AVEC SCAN
+                  conditionalPanel(
+                    condition = "output.photo_uploaded",
+                    br(),
+                    div(class = "photo-scanner",
+                      div(class = "scan-overlay"),
+                      div(style = "text-align: center; padding: 15px;",
+                        h4("🔍 PHOTO EN COURS DE SCAN...", style = "color: #00ff00; font-weight: bold;"),
+                        uiOutput("photo_display")
+                      )
+                    )
+                  ),
+                  
                   br(),
                   
                   actionButton("scan_photo", "🔍 SCANNER AVEC IA", 
@@ -502,7 +551,7 @@ ui <- dashboardPage(
                   br(), br(),
                   
                   div(id = "scan_status", style = "font-size: 16px; color: #667eea;",
-                    "💡 Uploadez une photo d'iris pour commencer l'analyse IA")
+                    textOutput("scan_status"))
                 )
             )
           ),
@@ -1005,6 +1054,40 @@ server <- function(input, output, session) {
   })
   
   # ===== TENSORFLOW IA VISION - SIMULATION RÉVOLUTIONNAIRE =====
+  
+  # AFFICHAGE DE LA PHOTO UPLOADÉE AVEC EFFETS FUTURISTES
+  output$photo_uploaded <- reactive({
+    return(!is.null(input$photo_iris))
+  })
+  outputOptions(output, 'photo_uploaded', suspendWhenHidden = FALSE)
+  
+  # Affichage de la photo avec style futuriste
+  output$photo_display <- renderUI({
+    req(input$photo_iris)
+    
+    # Créer un chemin temporaire pour afficher l'image
+    img_path <- input$photo_iris$datapath
+    
+    # Encoder l'image en base64 pour l'affichage
+    img_base64 <- base64enc::base64encode(img_path)
+    img_type <- tools::file_ext(input$photo_iris$name)
+    
+    tags$img(
+      src = paste0("data:image/", img_type, ";base64,", img_base64),
+      class = "photo-display",
+      style = "max-width: 250px; max-height: 200px; border-radius: 10px; 
+               box-shadow: 0 0 20px rgba(0,255,0,0.5);"
+    )
+  })
+  
+  # Status de scan dynamique
+  output$scan_status <- renderText({
+    if(is.null(input$photo_iris)) {
+      "💡 Uploadez une photo d'iris pour commencer l'analyse IA"
+    } else {
+      "🔍 Photo détectée ! Prête pour le scan TensorFlow..."
+    }
+  })
   
   # 🎯 SIMULATION INTELLIGENTE - MÊME PHOTO = MÊME RÉSULTAT !
   tensorflow_simulation <- reactive({
