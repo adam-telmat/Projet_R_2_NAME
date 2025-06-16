@@ -1,0 +1,99 @@
+R U Shiny
+Avec R on comprend le monde. Avec Shiny, on le montre.
+
+Introduction
+
+Après avoir bien travaillé sur votre premier projet de R, vous êtes tombés sur
+le super outil populaire R Shiny, votre nouvel objectif est de réaliser un super
+dashboard interactif à l’aide de cette librairie.
+
+_1
+
+Pourquoi le Nettoyage des Données et la Visualisation Interactive ?
+En Data Science, 80% du temps d’un data analyst est consacré au
+nettoyage et à la préparation des données. Un jeu
+de données brut est souvent incomplet, mal
+structuré et contenant des valeurs aberrantes.
+
+De plus, une analyse statique peut être limitée : les
+dashboards interactifs permettent d’explorer les
+données dynamiquement et d’adapter les
+
+visualisations aux besoins des utilisateurs.
+
+Ce projet vous permettra d’apprendre à :
+➔ Manipuler un dataset réel provenant d’un catalogue de données
+public
+➔ Effectuer un nettoyage avancé des données
+➔ Détecter et gérer les valeurs aberrantes et données manquantes
+➔ Créer un dashboard interactif sous R Shiny pour visualiser et filtrer les
+informations en temps réel
+
+Déroulement du Projet
+
+Ce projet est divisé en 4 grandes étapes, chacune avec des objectifs clairs et
+une mise en pratique sous R.
+
+_2
+
+Étape 1 : Sélection et Exploration du Dataset
+Objectif : Choisir un dataset pertinent et comprendre sa structure.
+➔ Télécharger un dataset brut depuis un catalogue de données
+publiques
+➔ Analyser sa structure et identifier ses défauts
+➔ Compter les valeurs manquantes
+Détecter les valeurs aberrantes avec un boxplot
+Interprétation attendue :
+➔ Quels sont les principaux problèmes du dataset ?
+➔ Quelles variables nécessitent un nettoyage en priorité ?
+Étape 2 : Nettoyage et Transformation des Données
+Objectif : Corriger les erreurs et structurer les données pour l’analyse.
+➔ Traitement des valeurs manquantes
+➔ Détection des valeurs aberrantes et correction
+➔ Renommage et restructuration des colonnes
+Questions à répondre :
+➔ Comment avez-vous corrigé les problèmes de qualité des données ?
+➔ Quels traitements ont eu le plus d’impact sur la structure des données ?
+
+_3
+
+Étape 3 : Développement du Dashboard Interactif sous R Shiny
+
+Objectif : Créer une interface fluide permettant une exploration dynamique
+des données.
+
+Créer un dashboard avec une interface utilisateur et des filtres dynamiques
+Questions à répondre :
+➔ Quels types d’interactions avez-vous intégrés ?
+➔ Comment les utilisateurs peuvent-ils manipuler les données en temps
+réel ?
+
+Étape 4 : Synthèse et Communication des Résultats
+Objectif : Présenter une analyse claire et exploitable.
+➔ Rédaction d’un rapport avec les principaux insights
+➔ Structuration d’une présentation PowerPoint
+➔ Explication des choix méthodologiques et des visualisations
+
+Compétences visées
+
+➔ Nettoyage et transformation avancée des données
+➔ Détection et gestion des valeurs aberrantes
+➔ Développement d’un Dashboard sous R Shiny
+➔ Optimisation et structuration d’un projet Data Science
+
+_4
+
+Rendu
+
+L’évaluation du projet se fera sur deux livrables :
+1️-Présentation explicative sous forme de diapositives
+➔ Présentation du dataset et justification du choix
+➔ Méthodologie de nettoyage
+➔ Capture d’écran et démonstration du dashboard interactif
+➔ Conclusion et recommandations
+
+2️- Repository GitHub public Projet_R_2_NAME contenant :
+➔ Code R propre et commenté
+➔ Scripts de nettoyage et transformation des données
+➔ Code du dashboard interactif sous R Shiny
+➔ Rapport synthétique en PDF
